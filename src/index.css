@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+.head-align {
+  padding-left: 300px;
+  width: 100%;
+}
+.contact-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.contact-list {
+  display: flex;
+  font-size: medium;
+  text-align: center;
+  align-content: space-between;
+  justify-content: center;
+}
+
+.contact-list .list:hover {
+  background-color: #dedede !important;
+}
+.addbuton {
+  font-weight: 600px;
+  justify-content: center;
+  font-size: 20px;
+  
+}
+.contact-name-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-name-column p {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
