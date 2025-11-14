@@ -1,50 +1,39 @@
-// ✅ AddContact.jsx
-// Used to add a new contact via a Bootstrap modal form
-
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
 function AddContact({ onAdd, onClose }) {
-  // 🔹 Control visibility of Add Contact modal
   const [showModal, setShowModal] = useState(true);
-
-  // 🔹 Store new contact input data
   const [newContact, setNewContact] = useState({
     name: "",
     email: "",
     mobile: "",
   });
 
-  // 🔹 Update state as user types in input fields
   const handleChange = (e) => {
     setNewContact({ ...newContact, [e.target.name]: e.target.value });
   };
 
-  // 🔹 Handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent page refresh
-    onAdd(newContact); // Pass new contact to parent (App.jsx)
+    e.preventDefault();
+    onAdd(newContact);
   };
 
   return (
     <Modal
       show={showModal}
       onHide={() => {
-        // Close modal when user clicks outside or on close button
         setShowModal(false);
         onClose();
       }}
+      centered
     >
-      {/* 🔹 Modal Header */}
       <Modal.Header closeButton>
         <Modal.Title>Add New Contact</Modal.Title>
       </Modal.Header>
 
-      {/* 🔹 Add Contact Form */}
       <form onSubmit={handleSubmit}>
         <Modal.Body>
-          {/* Name Input */}
           <div className="mb-3">
             <label className="form-label">Name</label>
             <input
@@ -57,7 +46,6 @@ function AddContact({ onAdd, onClose }) {
             />
           </div>
 
-          {/* Email Input */}
           <div className="mb-3">
             <label className="form-label">Email</label>
             <input
@@ -70,7 +58,6 @@ function AddContact({ onAdd, onClose }) {
             />
           </div>
 
-          {/* Mobile Input */}
           <div className="mb-3">
             <label className="form-label">Mobile</label>
             <input
@@ -84,15 +71,11 @@ function AddContact({ onAdd, onClose }) {
           </div>
         </Modal.Body>
 
-        {/* 🔹 Modal Footer Buttons */}
-        <Modal.Footer>
-          {/* Cancel Button */}
-          <Button variant="secondary" onClick={onClose}>
+        <Modal.Footer className="d-flex flex-column flex-md-row gap-2">
+          <Button variant="secondary" onClick={onClose} className="w-100 w-md-auto">
             Cancel
           </Button>
-
-          {/* Submit Button */}
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" className="w-100 w-md-auto">
             Add Contact
           </Button>
         </Modal.Footer>

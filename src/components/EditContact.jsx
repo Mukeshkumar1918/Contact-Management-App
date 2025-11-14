@@ -1,18 +1,11 @@
-// ✅ EditContact.jsx
-// Allows editing an existing contact using a Bootstrap modal with pre-filled data
-
 import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
 function EditContact({ contact, onUpdate, onClose }) {
-  // 🔹 State to control modal visibility
   const [showModal, setShowModal] = useState(false);
-
-  // 🔹 Form state to hold editable contact details
   const [formData, setFormData] = useState({ name: "", email: "", mobile: "" });
 
-  // 🔹 When a contact is passed as a prop, populate form fields & open modal
   useEffect(() => {
     if (contact) {
       setFormData(contact);
@@ -20,32 +13,26 @@ function EditContact({ contact, onUpdate, onClose }) {
     }
   }, [contact]);
 
-  // 🔹 Handle input changes in form fields
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // 🔹 Submit updated contact data to parent component
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent page reload
-    onUpdate(formData); // Call parent update function
-    onClose(); // Close modal after updating
+    e.preventDefault();
+    onUpdate(formData);
+    onClose();
   };
 
-  // 🔹 Return nothing if modal shouldn't be shown
   if (!showModal || !contact) return null;
 
   return (
-    <Modal show={showModal} onHide={onClose}>
-      {/* 🔹 Modal Header */}
+    <Modal show={showModal} onHide={onClose} centered>
       <Modal.Header closeButton>
         <Modal.Title>Edit Contact</Modal.Title>
       </Modal.Header>
 
-      {/* 🔹 Contact Edit Form */}
       <form onSubmit={handleSubmit}>
         <Modal.Body>
-          {/* Name Field */}
           <div className="mb-3">
             <label className="form-label">Name</label>
             <input
@@ -58,7 +45,6 @@ function EditContact({ contact, onUpdate, onClose }) {
             />
           </div>
 
-          {/* Email Field */}
           <div className="mb-3">
             <label className="form-label">Email</label>
             <input
@@ -71,7 +57,6 @@ function EditContact({ contact, onUpdate, onClose }) {
             />
           </div>
 
-          {/* Mobile Field */}
           <div className="mb-3">
             <label className="form-label">Mobile</label>
             <input
@@ -85,12 +70,11 @@ function EditContact({ contact, onUpdate, onClose }) {
           </div>
         </Modal.Body>
 
-        {/* 🔹 Footer Buttons */}
-        <Modal.Footer>
-          <Button variant="secondary" onClick={onClose}>
+        <Modal.Footer className="d-flex flex-column flex-md-row gap-2">
+          <Button variant="secondary" onClick={onClose} className="w-100 w-md-auto">
             Cancel
           </Button>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" className="w-100 w-md-auto">
             Update
           </Button>
         </Modal.Footer>
